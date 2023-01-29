@@ -1,0 +1,34 @@
+
+.table>:not(caption)>*>* {
+    padding: .5rem .5rem;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 0px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+
+.table thead th{
+    color:  #464E5F !important;
+    font-weight: 500 !important;
+}
+
+.status{
+    height: 35px;
+    width: 100px;
+    margin: 0 auto;
+    font-size: 14px !important;
+}
+
+table{
+    font-size: 14px !important;
+
+}
+#tabela_encomenda_wrapper{
+    margin-bottom: 50px;
+}
+
+#tabela_encomenda{
+    width: 100% !important;
+}
+
+
+

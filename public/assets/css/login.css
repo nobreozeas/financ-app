@@ -1,0 +1,43 @@
+.container {
+    height: 100vh !important;
+    background: linear-gradient(191deg, #020024 0, #6cb3f5 0, #84c2fb 100%);
+}
+
+.login_box {
+    min-width: 70%;
+    height: 80%;
+    background-color: #fff;
+    border-radius: 20px;
+
+}
+
+.login_img {
+    height: 100%;
+    padding-left: 10px;
+    background-color: #DCECFC;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.login {
+    height: 100%;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    color: #606368;
+}
+
+.formulario {
+    padding-top: 20px;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.label-form{
+    font-weight: 500;
+    color: #606368;
+}
+@media only screen and (max-width: 1400px) {
+    .container {
+        max-width: 100% !important;
+    }
+}

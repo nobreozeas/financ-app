@@ -340,13 +340,21 @@ thead tr {
     background-color: #F44336;
 }
 
+.div_form_transacao{
+    display: none;
+}
 
+#tabela_transacoes{
+    width: 100% !important;
+}
 
+.pagination{
+    margin: 16px 20px !important;
+}
 
-
-
-
-
+.dataTables_info{
+    margin: 16px 20px !important;
+}
 
 
 

@@ -42,4 +42,9 @@ class CategoriaController extends Controller
         $categoria->save();
         return response()->json(['message' => 'Categoria adicionada com sucesso', 'categoria' => $categoria ], 200);
     }
+
+    public function listaTransacoesCategoria()
+    {
+        return  $categoria = Categoria::with('transacoes')->whereHas('transacoes')->get();
+    }
 }

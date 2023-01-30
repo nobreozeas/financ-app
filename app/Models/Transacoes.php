@@ -11,4 +11,9 @@ class Transacoes extends Model
 
     protected $table = 'transacoes';
     protected $fillable = ['id_categoria', 'descricao', 'data', 'valor', 'tipo'];
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'id_categoria');
+    }
 }

@@ -22,9 +22,12 @@ Route::post('/categoria/edita', [CategoriaController::class, 'editarCategoria'])
 Route::post('/categoria/deleta', [CategoriaController::class, 'deletarCategoria'])->name('categorias.deleta');
 Route::post('/categoria/adiciona', [CategoriaController::class, 'adicionarCategoria'])->name('categorias.adiciona');
 
-
+Route::get('/transacoes', [TransacoesController::class, 'index'])->name('transacoes.index');
+Route::post('/transacoes/listar', [TransacoesController::class, 'listaTransacao'])->name('transacoes.listar');
 Route::post('/transacao/adiciona', [TransacoesController::class, 'adicionarTransacao'])->name('transacoes.adiciona');
 Route::get('/transacao/calcula', [TransacoesController::class, 'calculaReceita'])->name('transacoes.calculaReceita');
 Route::get('/transacao/calcula-despesa', [TransacoesController::class, 'calculaDespesa'])->name('transacoes.calculaDespesa');
 Route::get('transacao/saldo-atual', [TransacoesController::class, 'saldoAtual'])->name('transacoes.saldoAtual');
 Route::post('transacoes/balanco-mensal', [TransacoesController::class, 'balancoMensal'])->name('transacoes.balancoMensal');
+
+Route::get('/transacoes/categorias', [CategoriaController::class, 'listaTransacoesCategoria'])->name('categorias.listaTransacoesCategoria');

@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Transacoes;
 use Illuminate\Http\Request;
+use Termwind\Components\Dd;
 
 class TransacoesController extends Controller
 {
+
+    public function index()
+    {
+        return Transacoes::all();
+    }
+
     public function adicionarTransacao(Request $request)
     {
         //converter valor para decimal
-        $request->merge([ 'valor' => str_replace(',', '.', str_replace('.', '', $request->valor)) ]);
-
-
+        $request->merge(['valor' => str_replace(',', '.', str_replace('.', '', $request->valor))]);
         $receita = Transacoes::create([
             'tipo' => $request->tipo,
             'id_categoria' => $request->categoria,
@@ -21,14 +26,14 @@ class TransacoesController extends Controller
             'valor' => $request->valor,
         ]);
 
-        if($receita){
+        if ($receita) {
             return response()->json([
                 'message' => 'Receita adicionada com sucesso!'
-            ],200);
-        }else{
+            ], 200);
+        } else {
             return response()->json([
                 'message' => 'Erro ao adicionar receita!'
-            ],500);
+            ], 500);
         }
     }
 
@@ -37,30 +42,26 @@ class TransacoesController extends Controller
         $receitas = Transacoes::where('tipo', '1')->get();
 
         $total = 0.00;
-        foreach($receitas as $receita){
-            $total += (double)$receita->valor;
+        foreach ($receitas as $receita) {
+            $total += (float)$receita->valor;
         }
 
         return response()->json([
             'total' => $total
-        ],200);
+        ], 200);
     }
 
     public function calculaDespesa()
     {
         $despesas = Transacoes::where('tipo', "0")->get();
         $total = 0.00;
-        foreach($despesas as $despesa){
+        foreach ($despesas as $despesa) {
 
             $total += (float)$despesa->valor;
-
         }
-
-
-
         return response()->json([
             'total' => $total
-        ],200);
+        ], 200);
     }
 
     public function saldoAtual()
@@ -69,12 +70,12 @@ class TransacoesController extends Controller
         $despesas = Transacoes::where('tipo', '0')->get();
 
         $totalReceita = 0;
-        foreach($receitas as $receita){
+        foreach ($receitas as $receita) {
             $totalReceita += $receita->valor;
         }
 
         $totalDespesa = 0;
-        foreach($despesas as $despesa){
+        foreach ($despesas as $despesa) {
             $totalDespesa += $despesa->valor;
         }
 
@@ -82,11 +83,54 @@ class TransacoesController extends Controller
 
         return response()->json([
             'saldoAtual' => $saldoAtual
-        ],200);
+        ], 200);
     }
 
-   public function balancoMensal(Request $request)
-   {
+    public function balancoMensal(Request $request)
+    {
         return Transacoes::whereMonth('data', $request->mes)->whereYear('data', $request->ano)->get();
-   }
+    }
+
+    public function listaTransacao(Request $request)
+    {
+
+        $tipo = $request->tipo;
+
+        $transacoes = Transacoes::with('categoria')
+            ->select('transacoes.*');
+
+        if($tipo == '0'){
+            $transacoes = $transacoes->where('tipo', $tipo);
+
+        }
+        if($tipo == '1'){
+            $transacoes = $transacoes->where('tipo', $tipo);
+           
+        }
+        if($request->categoria){
+            $transacoes = $transacoes->where('id_categoria', $request->categoria);
+        }
+        if($request->mes){
+            $transacoes = $transacoes->whereMonth('data', $request->mes);
+        }
+        if($request->ano){
+            $transacoes = $transacoes->whereYear('data', $request->ano);
+        }
+
+        $orders = [
+            'data',
+            'descricao',
+            'id_categoria',
+            'tipo',
+            'valor',
+            ''
+
+        ];
+
+        $transacoes = $transacoes->orderBy($orders[$request->order[0]['column']], $request->order[0]['dir'])
+            ->paginate($request->length, ['*'], 'page', ($request->start / $request->length) + 1)
+            ->toArray();
+
+        return ["draw" => $request->draw, "recordsTotal" => (int) $transacoes['to'], "recordsFiltered" => (int) $transacoes['total'], "data" => $transacoes["data"]];
+    }
 }

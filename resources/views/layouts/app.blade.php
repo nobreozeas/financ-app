@@ -162,7 +162,9 @@
                         })
                         input.val('');
                         $('.lista_categoria').empty();
-                        $('.lista_categoria').append(` <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p>`);
+                        $('.lista_categoria').append(
+                            ` <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p>`
+                            );
 
                         mostraConteudo();
                     }
@@ -241,11 +243,18 @@
                             }
                         })
                         $('.lista_categoria').empty();
-                        $('.lista_categoria').append(` <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p>`);
+                        $('.lista_categoria').append(
+                            ` <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p>`
+                            );
                         mostraConteudo();
                     }
                 })
             });
+
+            $('#modalCategoria').on('hide.bs.modal', function(event) {
+
+               window.location.reload();
+            })
         });
     </script>
 @endpush

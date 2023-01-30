@@ -11,4 +11,9 @@ class Categoria extends Model
 
     protected $table = 'categorias';
     protected $fillable = ['descricao'];
+
+    public function transacoes()
+    {
+        return $this->hasMany(Transacoes::class, 'id_categoria', 'id');
+    }
 }

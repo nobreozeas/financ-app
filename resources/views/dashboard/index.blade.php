@@ -320,7 +320,6 @@
 @endsection
 @push('scripts')
     <script>
-
         //criar array com as cores para as categorias
 
 
@@ -354,48 +353,48 @@
         $(document).ready(function() {
 
             const cores = [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(153, 102, 255)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(153, 102, 255)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(153, 102, 255)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(153, 102, 255)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(153, 102, 255)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(153, 102, 255)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(153, 102, 255)'
-        ];
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(153, 102, 255)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(153, 102, 255)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(153, 102, 255)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(153, 102, 255)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(153, 102, 255)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(153, 102, 255)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(153, 102, 255)'
+            ];
             $.ajax({
                 url: "{{ route('categorias.listaTransacoesCategoria') }}",
                 type: "GET",
@@ -404,40 +403,69 @@
                     console.log(data);
 
                     //pegar apenas as categorias em um for
-                    let categorias = [];
+                    // let categorias = [];
+                    // for (let i = 0; i < data.length; i++) {
+                    //     for (let j = 0; j < data[i].transacoes.length; j++) {
+                    //         if (data[i].transacoes[j].tipo == '0') {
+                    //             categorias.push(data[i].descricao);
+                    //         }
+                    //     }
+
+                    // }
+                    // console.log(categorias);
+
+                    // //pegar apenas os valores em um for
+                    // let valores = [];
+                    // for (let i = 0; i < data.length; i++) {
+                    //     for (let j = 0; j < data[i].transacoes.length; j++) {
+                    //         if (data[i].transacoes[j].tipo == '0') {
+
+                    //             valores.push(data[i].transacoes[j].valor);
+                    //         }
+                    //     }
+                    // }
+                    // //verificar se a categoria já existe no array
+                    // //se existir, deixar apenas a primeira ocorrência
+                    // //se não existir, adicionar no array
+                    // let categoriasUnicas = [];
+                    // for (let i = 0; i < categorias.length; i++) {
+                    //     if (categoriasUnicas.indexOf(categorias[i]) == -1) {
+                    //         categoriasUnicas.push(categorias[i]);
+                    //     }
+                    // }
+                    // console.log(categoriasUnicas);
+
+                    let categorias = {};
+
                     for (let i = 0; i < data.length; i++) {
-                        for (let j = 0; j < data[i].transacoes.length; j++) {
-                            if (data[i].transacoes[j].tipo == '0') {
-                                categorias.push(data[i].descricao);
-                            }
-                        }
 
-                    }
-                    console.log(categorias);
-
-                    //pegar apenas os valores em um for
-                    let valores = [];
-                    for (let i = 0; i < data.length; i++) {
                         for (let j = 0; j < data[i].transacoes.length; j++) {
+
                             if (data[i].transacoes[j].tipo == '0') {
 
-                                valores.push(data[i].transacoes[j].valor);
+                                if (categorias[data[i].descricao] == undefined) {
+
+                                    categorias[data[i].descricao] = 0
+
+                                }
+
+                                categorias[data[i].descricao] += parseFloat(data[i].transacoes[j]
+                                    .valor) ?? 0;
+
                             }
-                        }
-                    }
-                    //verificar se a categoria já existe no array
-                    //se existir, deixar apenas a primeira ocorrência
-                    //se não existir, adicionar no array
-                    let categoriasUnicas = [];
-                    for (let i = 0; i < categorias.length; i++) {
-                        if (categoriasUnicas.indexOf(categorias[i]) == -1) {
-                            categoriasUnicas.push(categorias[i]);
-                        }
-                    }
-                    console.log(categoriasUnicas);
 
+                        }
 
-                    graficoDespesa(categoriasUnicas, valores, cores);
+                    }
+
+                    let label = []
+                    let dados = []
+                    for (let key in categorias) {
+                        label.push(key)
+                        dados.push(categorias[key])
+                    }
+
+                    graficoDespesa(label, dados, cores);
                 }
             })
 
@@ -896,23 +924,41 @@
 
 
             function graficoDespesa(categoria, valor, cores) {
-            const ctx = document.getElementById('chartPie');
-            const data = {
-                labels: categoria,
-                datasets: [{
-                    label: 'Valor gasto',
-                    data: valor,
-                    backgroundColor: cores,
-                    hoverOffset: 4
-                }]
-            };
-            const config = {
-                type: 'pie',
-                data: data,
-            };
+                const ctx = document.getElementById('chartPie');
+                const data = {
+                    labels: categoria,
+                    datasets: [{
+                        label: 'Valor gasto',
+                        data: valor,
+                        backgroundColor: cores,
+                        hoverOffset: 4
+                    }]
+                };
+                const config = {
+                    type: 'pie',
+                    data: data,
+                };
 
-            new Chart(ctx, config);
-        }
+                new Chart(ctx, config);
+            }
+
+            //funcao para verificar se é cpf ou cnpj
+
+            function verificaCpfCnpj(valor) {
+                //retira caracteres invalidos do valor
+                valor = valor.replace(/[^0-9]/g, '');
+
+                //verifica se tem 11 digitos
+                if (valor.length == 11) {
+                    return 'CPF';
+                } else if (valor.length == 14) {
+                    return 'CNPJ';
+                } else {
+                    return false;
+                }
+            }
+
+
 
         });
     </script>

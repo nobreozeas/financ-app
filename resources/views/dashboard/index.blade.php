@@ -2,6 +2,40 @@
 @section('title', 'Vida Financeira')
 
 @section('content')
+
+    <style>
+        .loader {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: #fff;
+        }
+
+        .cont {
+            height: 100%;
+        }
+    </style>
+
+    <div class="loader">
+
+        <div class="row cont">
+            <div class="col d-flex flex-column align-items-center justify-content-center">
+                <div class="">
+                    <img src="{{ asset('assets/images/loading.gif') }}" alt="carregando..." class="img-fluid" style="max-width: 250px; ">
+
+                </div>
+                <div>
+                    <h5 class="text-secondary">Carregando...</h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
     <div class="container mt-5">
 
         <div class="row mt-5">
@@ -144,7 +178,7 @@
                     <table class="table table-responsive table-hover" id="tabela_transacoes">
                         <thead>
                             <tr>
-                                <th scope="col">Data</th>
+                                <th scope="col" style="text-align:center;">Data</th>
                                 <th scope="col">Descrição</th>
                                 <th scope="col">Categoria</th>
                                 <th scope="col">Tipo</th>
@@ -352,6 +386,15 @@
     <script>
         $(document).ready(function() {
 
+
+            $(window).on('load', function() {
+                setTimeout(() => {
+                    $('.loader').hide();
+                }, 2000);
+            })
+
+
+
             const cores = [
                 'rgb(255, 99, 132)',
                 'rgb(54, 162, 235)',
@@ -400,41 +443,6 @@
                 type: "GET",
                 dataType: "json",
                 success: function(data) {
-                    console.log(data);
-
-                    //pegar apenas as categorias em um for
-                    // let categorias = [];
-                    // for (let i = 0; i < data.length; i++) {
-                    //     for (let j = 0; j < data[i].transacoes.length; j++) {
-                    //         if (data[i].transacoes[j].tipo == '0') {
-                    //             categorias.push(data[i].descricao);
-                    //         }
-                    //     }
-
-                    // }
-                    // console.log(categorias);
-
-                    // //pegar apenas os valores em um for
-                    // let valores = [];
-                    // for (let i = 0; i < data.length; i++) {
-                    //     for (let j = 0; j < data[i].transacoes.length; j++) {
-                    //         if (data[i].transacoes[j].tipo == '0') {
-
-                    //             valores.push(data[i].transacoes[j].valor);
-                    //         }
-                    //     }
-                    // }
-                    // //verificar se a categoria já existe no array
-                    // //se existir, deixar apenas a primeira ocorrência
-                    // //se não existir, adicionar no array
-                    // let categoriasUnicas = [];
-                    // for (let i = 0; i < categorias.length; i++) {
-                    //     if (categoriasUnicas.indexOf(categorias[i]) == -1) {
-                    //         categoriasUnicas.push(categorias[i]);
-                    //     }
-                    // }
-                    // console.log(categoriasUnicas);
-
                     let categorias = {};
 
                     for (let i = 0; i < data.length; i++) {
@@ -569,8 +577,6 @@
 
                                 } else {
                                     window.location.reload();
-
-
                                 }
 
                             });
@@ -617,7 +623,7 @@
                     url: "{{ route('transacoes.calculaReceita') }}",
                     type: "GET",
                     success: function(data) {
-                        console.log('receita', data);
+
                         let saldo = data.total;
                         if (saldo == 0 || saldo == null) {
                             conteudo += `<span class="saldo">R$ 0,00</span>`
@@ -647,7 +653,7 @@
                     url: "{{ route('transacoes.calculaDespesa') }}",
                     type: "GET",
                     success: function(data) {
-                        console.log('despesa', data);
+
 
                         let saldo = data.total;
                         if (saldo == 0 || saldo == null) {
@@ -846,14 +852,14 @@
                         }
                     }, {
                         data: null,
-                        orderable: false,
+                        orderable: true,
                         className: 'text-center align-middle',
                         render: function(data) {
                             return data.categoria.descricao;
                         }
                     }, {
                         data: null,
-                        orderable: false,
+                        orderable: true,
                         className: 'text-center align-middle',
                         render: function(data) {
                             if (data.tipo == "0") {

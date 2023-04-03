@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/select2-bootstrap-5-theme.min.css') }}" />
     <link rel="stylesheet" href="{{asset('assets/css/datatables.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap5.min.css')}}">
+
     @stack('styles')
     <script src="{{ asset('assets/js/chart.js') }}"></script>
 </head>

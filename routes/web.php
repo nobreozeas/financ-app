@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TransacoesController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::get('/', [LoginController::class, 'index'])->name('login.index');
+Route::get('/registrar', [LoginController::class, 'registrar'])->name('login.registrar');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 Route::get('/categorias', [CategoriaController::class, 'listaCategoria'])->name('categorias.lista');
 Route::post('/categoria/edita', [CategoriaController::class, 'editarCategoria'])->name('categorias.edita');
 Route::post('/categoria/deleta', [CategoriaController::class, 'deletarCategoria'])->name('categorias.deleta');

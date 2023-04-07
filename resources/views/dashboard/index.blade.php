@@ -20,11 +20,11 @@
     </style>
 
     <div class="loader">
-
         <div class="row cont">
             <div class="col d-flex flex-column align-items-center justify-content-center">
                 <div class="">
-                    <img src="{{ asset('assets/images/loading.gif') }}" alt="carregando..." class="img-fluid" style="max-width: 250px; ">
+                    <img src="{{ asset('assets/images/loading.gif') }}" alt="carregando..." class="img-fluid"
+                        style="max-width: 250px; ">
 
                 </div>
                 <div>
@@ -38,19 +38,17 @@
 
     <div class="container mt-5">
 
-        <div class="row mt-5">
+        <div class="row mt-5 botao_add">
             <div class="col-md-3">
-                <div class="dropdown">
-                    <button class="btn btn_add" data-bs-toggle="modal" data-bs-target="#modalReceita"><i
-                            class="fa-solid fa-plus me-4"></i>Novo</button>
+                <button class="btn btn_add" data-bs-toggle="modal" data-bs-target="#modalReceita"><i
+                        class="fa-solid fa-plus me-4"></i>Novo</button>
 
-                </div>
             </div>
         </div>
 
         <div class="row">
 
-            <div class="col-md-3 col-sm-12 cartoes">
+            <div class="col-md-3 col-sm-6 cartoes">
                 <div class="card cartoes_dashboard">
                     <div class="card-body d-flex justify-content-between">
                         <div>
@@ -73,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-12 cartoes">
+            <div class="col-md-3 col-sm-6 cartoes">
                 <div class="card cartoes_dashboard">
                     <div class="card-body d-flex justify-content-between">
                         <div>
@@ -96,7 +94,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-12 cartoes">
+            <div class="col-md-3 col-sm-6 cartoes">
                 <div class="card cartoes_dashboard">
                     <div class="card-body d-flex justify-content-between">
                         <div>
@@ -119,7 +117,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-12 cartoes">
+            <div class="col-md-3 col-sm-6 cartoes">
                 <div class="card cartoes_dashboard">
                     <div class="card-body d-flex justify-content-between">
                         <div>
@@ -147,26 +145,23 @@
             <div class="col">
                 <div class="box_tabela">
                     <div class="row filtros">
-                        <div class="col-md-2">
+                        <div class="col-md-2 mb-3 ">
                             <select name="mes" id="mes" class="form-select">
 
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 mb-3 ">
                             <select name="ano" id="ano" class="form-select">
 
                             </select>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-3 mb-3 ">
                             <select name="categoria" id="categoria" class="form-select">
-                                <option value="" selected>Categorias</option>
-                                @foreach ($categorias as $categoria)
-                                    <option value="{{ $categoria->id }}">{{ $categoria->descricao }}</option>
-                                @endforeach
+
                             </select>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 mb-3 ">
                             <select name="tipo" id="tipo" class="form-select">
 
                             </select>
@@ -193,13 +188,13 @@
             </div>
         </div>
 
-        <div class="row mt-4 d-flex justify-content-between">
+        <div class="row mt-4 d-flex justify-content-between" style="margin-bottom: 50px;">
             <div class="col">
                 <div class="div_graficos">
                     <div class="mb-2">
                         <span class="titulo_grafico">Despesas por Categoria</span>
                     </div>
-                    <div class="box box_graficos mb-5" style="height: 466px;">
+                    <div class="box box_graficos mb-2" style="height: 466px;">
                         <canvas id="chartPie"></canvas>
                     </div>
                 </div>
@@ -209,7 +204,7 @@
                     <div class="mb-2">
                         <span class="titulo_grafico">Receitas por Categoria</span>
                     </div>
-                    <div class="box box_graficos mb-5" style="height: 466px;">
+                    <div class="box box_graficos mb-2" style="height: 466px;">
                         <canvas id="chartPie2"></canvas>
                     </div>
                 </div>
@@ -221,7 +216,7 @@
                             <div class="mb-2">
                                 <span class="titulo_grafico">Cartões de Crédito</span>
                             </div>
-                            <div class="box box_graficos d-flex flex-column align-items-center p-3">
+                            <div class="box box_graficos mb-2 d-flex flex-column align-items-center p-3">
                                 <div>
                                     <i class="fa fa-credit-card  text-secondary" style="font-size: 35px;"></i>
                                 </div>
@@ -233,7 +228,7 @@
                                     <small style="">Melhore seu controle financeiro agora!</small>
                                 </div>
                                 <div>
-                                    <button class="btn btn_cadastrar_cartao">Cadastrar Cartão</button>
+                                    <a href="{{route('cartoes.index')}}" class="btn btn_cadastrar_cartao">Cadastrar Cartão</a>
                                 </div>
 
                             </div>
@@ -269,85 +264,7 @@
 
         <!-- ----------------- MODAL receita ----------------- -->
 
-        <div class="modal fade" id="modalReceita" tabindex="-1" aria-labelledby="modalReceitaLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalReceitaLabel"> <i class="fa fa-plus text-primary"
-                                aria-hidden="true"></i> Novo</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="carregaModalContent">
-                            <p class="placeholder-glow">
-                                <span class="placeholder col-4"></span>
-                                <span class="placeholder col-4"></span>
-                            </p>
-                            <p class="card-text placeholder-glow">
-                                <span class="placeholder col-4"></span>
-                                <span class="placeholder col-4"></span>
-                                <span class="placeholder col-4"></span>
-                                <span class="placeholder col-4"></span>
-                            </p>
-                        </div>
-                        <div class="div_form_transacao">
-                            <form class="row g-3" action="" id="formulario_transacao">
-                                <div class="col-md-12">
-                                    <div class="btn_transacao">
-                                        <input type="radio" value="1" class="input_transacao" checked
-                                            name="transacao" id="receita">
-                                        <label for="receita" class="label_transacao label_receita">Receita</label>
-                                        <input type="radio" value="0" class="input_transacao" name="transacao"
-                                            id="despesa">
-                                        <label for="despesa" class="label_transacao label_despesa">Despesa</label>
-                                    </div>
 
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="descricao" class="form-label">Descrição</label>
-                                    <input type="text" class="form-control" id="descricao">
-                                    <div class="invalid-feedback">
-                                        Insira uma descrição.
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="data" class="form-label">Data</label>
-                                    <input type="date" class="form-control" id="data">
-                                    <div class="invalid-feedback">
-                                        Insira uma data.
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="valor" class="form-label">Valor</label>
-                                    <input type="text" class="form-control" id="valor">
-                                    <div class="invalid-feedback">
-                                        Insira um valor.
-                                    </div>
-                                </div>
-                                <div class="col-md-6 categoria_col">
-                                    <label for="categoria_name" class="form-label">Categoria</label>
-                                    <select id="categoria_name" class="form-select categoria_name">
-
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Selecione uma categoria.
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="btn_add_receita" class="btn btn-primary"><i class="fa fa-save me-2"
-                                aria-hidden="true"></i>Salvar</button>
-                        <button type="button" class="btn btn-secondary btn_close_modal" data-bs-dismiss="modal"> <i
-                                class="fa-solid fa-xmark"></i> Fechar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
 
@@ -386,12 +303,10 @@
     <script>
         $(document).ready(function() {
 
+            setTimeout(() => {
+                $('.loader').hide();
+            }, 2000);
 
-            $(window).on('load', function() {
-                setTimeout(() => {
-                    $('.loader').hide();
-                }, 2000);
-            })
 
 
 
@@ -477,143 +392,10 @@
                 }
             })
 
-
-            $('#data').val(moment().format('YYYY-MM-DD'));
-
-            $('#valor').mask('#.##0,00', {
-                reverse: true
-            });
-
             calculaReceitas();
             calculaDespesas();
             calculaSaldoAtual();
             balancoMensal();
-
-            $('.modal').on('show.bs.modal', function(event) {
-                listaCategoriaSelect(false);
-                $('.carregaModalContent').hide();
-                $('.div_form_transacao').show();
-            })
-
-            $('.modal').on('hide.bs.modal', function(event) {
-
-                $('#descricao').val('');
-                $('#data').val(moment().format('YYYY-MM-DD'));
-                $('#valor').val('');
-                $('#categoria_name').val('');
-                $('#categoria_name').removeClass('is-invalid');
-                $('#descricao').removeClass('is-invalid');
-                $('#data').removeClass('is-invalid');
-                $('#valor').removeClass('is-invalid');
-                listaCategoriaSelect(true);
-            })
-
-            function listaCategoriaSelect(remove = false) {
-                if (remove == true) {
-                    $('.categoria_name').html('');
-                } else if (remove == false) {
-                    $.ajax({
-                        url: "{{ route('categorias.lista') }}",
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-
-                            let conteudo = '';
-
-                            conteudo += `<option selected value="">Escolher...</option>`;
-
-                            for (let i in data) {
-                                conteudo += `
-                            <option value="${data[i].id}">${data[i].descricao}</option> `;
-                            }
-                            conteudo += `</select>`;
-                            $('.categoria_name').append(conteudo);
-
-                        }
-                    })
-                }
-
-            }
-
-            $('#btn_add_receita').on('click', function() {
-
-
-                if ($('#descricao').val() != '' && $('#data').val() != '' && $('#valor').val() != '' && $(
-                        '#categoria_name').val() != '') {
-                    $.ajax({
-                        url: "{{ route('transacoes.adiciona') }}",
-                        type: "POST",
-                        data: {
-
-                            descricao: $('#descricao').val(),
-                            data: $('#data').val(),
-                            valor: $('#valor').val(),
-                            categoria: $('#categoria_name').val(),
-                            tipo: $('input[name=transacao]:checked').val(),
-                        },
-                        success: function(data) {
-
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Sucesso!',
-                                text: data.message,
-                                showConfirmButton: true,
-                                showCancelButton: true,
-                                confirmButtonText: 'Inserir outra Transação',
-                                cancelButtonText: 'Fechar',
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    $('#descricao').val('');
-                                    $('#data').val(moment().format('YYYY-MM-DD'));
-                                    $('#valor').val('');
-                                    $('#categoria_name').val('');
-
-                                    $('#descricao').removeClass('is-invalid');
-                                    $('#data').removeClass('is-invalid');
-                                    $('#valor').removeClass('is-invalid');
-                                    $('#categoria_name').removeClass('is-invalid');
-
-                                } else {
-                                    window.location.reload();
-                                }
-
-                            });
-                        }
-                    });
-
-                } else {
-                    if ($('#descricao').val() == '') {
-                        $('#descricao').addClass('is-invalid');
-                    } else {
-                        $('#descricao').removeClass('is-invalid');
-                    }
-
-                    if ($('#data').val() == '') {
-                        $('#data').addClass('is-invalid');
-                    } else {
-                        $('#data').removeClass('is-invalid');
-                    }
-
-                    if ($('#valor').val() == '') {
-                        $('#valor').addClass('is-invalid');
-                    } else {
-                        $('#valor').removeClass('is-invalid');
-                    }
-
-                    if ($('#categoria_name').val() == '') {
-                        $('#categoria_name').addClass('is-invalid');
-                    } else {
-                        $('#categoria_name').removeClass('is-invalid');
-                    }
-
-                    return false;
-                }
-            });
-
-
-
 
             //funcao para calcular as receitas
 
@@ -810,6 +592,34 @@
                     $('#tipo').append(conteudoTipo);
                 }
             });
+
+
+            function selectCategorias() {
+                $.ajax({
+                    url: "{{ route('categorias.categorias') }}",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        let conteudoCategoria = '';
+                        conteudoCategoria += `<option value="" selected>Categorias</option>`;
+                        for (let i in data) {
+                            conteudoCategoria +=
+                                `<option value="${data[i].id}">${data[i].descricao}</option>`;
+                        }
+                        $('#categoria').html('');
+                        $('#categoria').append(conteudoCategoria);
+                    },
+                    complete: function() {
+                        $('#modalCategoria').on('hide.bs.modal', function(event) {
+
+                            setTimeout(selectCategorias, 1000);
+
+                        });
+                    }
+                });
+            }
+
+            selectCategorias();
 
             var tabela = $('#tabela_transacoes').DataTable({
                 "searching": false,

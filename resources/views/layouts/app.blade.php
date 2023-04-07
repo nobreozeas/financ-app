@@ -1,7 +1,10 @@
 @include('layouts.header')
 
 
-@include('layouts.menu')
+@include('components.menu')
+
+@include('components.menu_bottom')
+@include('components.receita_despesa')
 
 
 @yield('content')
@@ -164,7 +167,7 @@
                         $('.lista_categoria').empty();
                         $('.lista_categoria').append(
                             ` <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p>`
-                            );
+                        );
 
                         mostraConteudo();
                     }
@@ -245,16 +248,146 @@
                         $('.lista_categoria').empty();
                         $('.lista_categoria').append(
                             ` <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p> <p class="placeholder-wave"> <span class="placeholder col-12"></span> </p>`
-                            );
+                        );
                         mostraConteudo();
                     }
                 })
             });
 
-            $('#modalCategoria').on('hide.bs.modal', function(event) {
+            // $('#modalCategoria').on('hide.bs.modal', function(event) {
 
-               window.location.reload();
+            //    window.location.reload();
+            // })
+
+            $('#btn_add_receita').on('click', function() {
+                if ($('#descricao').val() != '' && $('#data').val() != '' && $('#valor').val() != '' && $(
+                        '#categoria_name').val() != '') {
+                    $.ajax({
+                        url: "{{ route('transacoes.adiciona') }}",
+                        type: "POST",
+                        data: {
+
+                            descricao: $('#descricao').val(),
+                            data: $('#data').val(),
+                            valor: $('#valor').val(),
+                            categoria: $('#categoria_name').val(),
+                            tipo: $('input[name=transacao]:checked').val(),
+                        },
+                        success: function(data) {
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Sucesso!',
+                                text: data.message,
+                                showConfirmButton: true,
+                                showCancelButton: true,
+                                confirmButtonText: 'Inserir outra Transação',
+                                cancelButtonText: 'Fechar',
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $('#descricao').val('');
+                                    $('#data').val(moment().format('YYYY-MM-DD'));
+                                    $('#valor').val('');
+                                    $('#categoria_name').val('');
+
+                                    $('#descricao').removeClass('is-invalid');
+                                    $('#data').removeClass('is-invalid');
+                                    $('#valor').removeClass('is-invalid');
+                                    $('#categoria_name').removeClass('is-invalid');
+
+                                } else {
+                                    window.location.reload();
+                                }
+
+                            });
+                        }
+                    });
+
+                } else {
+                    if ($('#descricao').val() == '') {
+                        $('#descricao').addClass('is-invalid');
+                    } else {
+                        $('#descricao').removeClass('is-invalid');
+                    }
+
+                    if ($('#data').val() == '') {
+                        $('#data').addClass('is-invalid');
+                    } else {
+                        $('#data').removeClass('is-invalid');
+                    }
+
+                    if ($('#valor').val() == '') {
+                        $('#valor').addClass('is-invalid');
+                    } else {
+                        $('#valor').removeClass('is-invalid');
+                    }
+
+                    if ($('#categoria_name').val() == '') {
+                        $('#categoria_name').addClass('is-invalid');
+                    } else {
+                        $('#categoria_name').removeClass('is-invalid');
+                    }
+
+                    return false;
+                }
+            });
+
+            $('#data').val(moment().format('YYYY-MM-DD'));
+
+            $('#valor').mask('#.##0,00', {
+                reverse: true
+            });
+
+            $('.modal').on('show.bs.modal', function(event) {
+                listaCategoriaSelect(false);
+                $('.carregaModalContent').hide();
+                $('.div_form_transacao').show();
             })
+
+            $('.modal').on('hide.bs.modal', function(event) {
+
+                $('#descricao').val('');
+                $('#data').val(moment().format('YYYY-MM-DD'));
+                $('#valor').val('');
+                $('#categoria_name').val('');
+                $('#categoria_name').removeClass('is-invalid');
+                $('#descricao').removeClass('is-invalid');
+                $('#data').removeClass('is-invalid');
+                $('#valor').removeClass('is-invalid');
+                listaCategoriaSelect(true);
+            })
+
+            function listaCategoriaSelect(remove = false) {
+                if (remove == true) {
+                    $('.categoria_name').html('');
+                } else if (remove == false) {
+                    $.ajax({
+                        url: "{{ route('categorias.lista') }}",
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+
+                            let conteudo = '';
+
+                            conteudo += `<option selected value="">Escolher...</option>`;
+
+                            for (let i in data) {
+                                conteudo += `
+                            <option value="${data[i].id}">${data[i].descricao}</option> `;
+                            }
+                            conteudo += `</select>`;
+                            $('.categoria_name').append(conteudo);
+
+                        }
+                    })
+                }
+
+            }
+
+
+
         });
     </script>
 @endpush

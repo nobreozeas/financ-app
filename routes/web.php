@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartaoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
@@ -19,12 +20,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LoginController::class, 'index'])->name('login.index');
 Route::get('/registrar', [LoginController::class, 'registrar'])->name('login.registrar');
+Route::get('/esqueci-senha', [LoginController::class, 'esqueciSenha'])->name('login.esqueciSenha');
+Route::get('/recuperar-senha', [LoginController::class, 'recuperarSenha'])->name('login.recuperarSenha');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 Route::get('/categorias', [CategoriaController::class, 'listaCategoria'])->name('categorias.lista');
 Route::post('/categoria/edita', [CategoriaController::class, 'editarCategoria'])->name('categorias.edita');
 Route::post('/categoria/deleta', [CategoriaController::class, 'deletarCategoria'])->name('categorias.deleta');
 Route::post('/categoria/adiciona', [CategoriaController::class, 'adicionarCategoria'])->name('categorias.adiciona');
+Route::get('/categoria/categorias', [CategoriaController::class, 'categorias'])->name('categorias.categorias');
 
 Route::get('/transacoes', [TransacoesController::class, 'index'])->name('transacoes.index');
 Route::post('/transacoes/listar', [TransacoesController::class, 'listaTransacao'])->name('transacoes.listar');
@@ -35,3 +39,6 @@ Route::get('transacao/saldo-atual', [TransacoesController::class, 'saldoAtual'])
 Route::post('transacoes/balanco-mensal', [TransacoesController::class, 'balancoMensal'])->name('transacoes.balancoMensal');
 
 Route::get('/transacoes/categorias', [CategoriaController::class, 'listaTransacoesCategoria'])->name('categorias.listaTransacoesCategoria');
+
+
+Route::get('/cartoes', [CartaoController::class, 'index'])->name('cartoes.index');

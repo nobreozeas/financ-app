@@ -15,4 +15,14 @@ class LoginController extends Controller
     {
         return view('login.registrar');
     }
+
+    public function esqueciSenha()
+    {
+        return view('login.esqueci_senha');
+    }
+
+    public function recuperarSenha()
+    {
+        return view('login.recuperar_senha');
+    }
 }

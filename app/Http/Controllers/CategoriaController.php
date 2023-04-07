@@ -47,4 +47,10 @@ class CategoriaController extends Controller
     {
         return  $categoria = Categoria::with('transacoes')->whereHas('transacoes')->get();
     }
+
+    public function categorias()
+    {
+        return Categoria::all();
+    }
+
 }

@@ -4,11 +4,27 @@
         <div class="container">
             <div class="row row_menu">
                 <div class="col">
-                    <a href="" class="navbar-brand">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="" width="150">
+                    <a href="{{route('dashboard.index')}}" class="navbar-brand" id="brand_desktop">
+                            <img src="{{ asset('assets/images/logo.png') }}" alt="" width="150">
                     </a>
+
+                    <a href="javascript:void(0)" class="navbar-brand" id="brand_mobile">
+                        @if (Route::is('dashboard.index'))
+                            <img src="{{ asset('assets/images/logo.png') }}" alt="" width="150">
+                        @else
+                            <div class="d-flex align-items-center">
+                                <a href=" javascript:void(0) " onclick="history.back()">
+                                    <i class="fa fa-arrow-left" style="font-size: 30px;" aria-hidden="true"></i>
+                                </a>
+                            </div>
+
+                        @endif
+                    </a>
+
+
+
                 </div>
-                <div class="col">
+                <div class="col menu_grande">
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a href="#" class="nav-link text-decoration-none"><i

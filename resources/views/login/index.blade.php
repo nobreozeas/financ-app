@@ -1,74 +1,52 @@
-@extends('layouts.header')
+@extends('layouts.login')
 @section('title', 'Login')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
 @endpush
 
+@section('content')
 
-<div class="container d-flex flex-column align-items-center justify-content-center" style="">
-    <div class="login_box d-flex flex-row justify-content-between">
-
-        <div class="col login_img_col">
-            <div class="login_img">
-                <img src="{{ asset('assets/images/login.png') }}" alt="" width="450">
-                <span class="texto_imagem">Vida Financeira</span>
+    <div class="login">
+        <div class="login_box">
+            <div class="my-3">
+                <span class="texto_imagem">Vida Financeira<i class="fa-light fa-sack-dollar ms-2"></i></span>
             </div>
-        </div>
-        <div class="col">
-            <div class="login">
-                <h1 class="text-center">Login</h1>
+            <div class="my-4">
+                <h1 class="texto_login">Login</h1>
+            </div>
 
-                <div class="formulario">
-                    <form action="">
-                        <div class="row g-2 mb-2">
-                            <div class="col-12">
-
-                                <input type="text" id="usuario" name="usuario" class="form-control"
-                                    placeholder="Usuário ou Email">
-                            </div>
-                            <div class="col-12">
-
-                                <div class="input-group">
-                                    <input type="password" id="senha" name="senha" class="form-control"
-                                        placeholder="Senha">
-                                    <span class="input-group-text">
-                                        <i class="fa fa-eye" id="mostrar-senha-icon"></i>
-                                    </span>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row g-3">
-                            <div class="col-12 w-100 pt-3">
-                                <a href="{{ route('dashboard.index') }}" class="btn btn_login"><i
-                                        class="fa-solid fa-right-to-bracket me-2"></i>Entrar</a>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="d-flex justify-content-between">
-                                    <a href="{{ route('login.registrar') }}" class="text-decoration-none"
-                                        style="color:#35128C">Registrar-me</a>
-                                    <a href="" class="text-decoration-none" style="color:#35128C">Esqueci
-                                        minha senha</a>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-
+            <form action="" class="row g-3 px-3">
+                <div class="col-12">
+                    <input type="text" id="usuario" name="usuario" class="form-control input"
+                        placeholder="Email">
+                </div>
+                <div class="col-12">
+                    <div class="input-group ">
+                        <input type="password" id="senha" name="senha" class="form-control input" placeholder="Senha">
+                        <span class="input-group-text">
+                            <i class="fa fa-eye" id="mostrar-senha-icon"></i>
+                        </span>
+                    </div>
                 </div>
 
-                <div class="d-flex justify-content-center align-items-end" style="height: 100px; color: #b9b9b9">
-                    <p>nobretech&copy;@php echo date('Y'); @endphp</p>
+                <div class="col-12 w-100 pt-3">
+                    <a href="{{ route('dashboard.index') }}" class="btn btn_login"><i
+                            class="fa-solid fa-right-to-bracket me-2"></i>Entrar</a>
                 </div>
 
-            </div>
+                <div class="col-12">
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ route('login.registrar') }}" class="text-decoration-none"
+                            style="color:#35128C">Registrar-me</a>
+                        <a href="{{route('login.recuperarSenha')}}" class="text-decoration-none" style="color:#35128C">Esqueci
+                            minha senha</a>
+                    </div>
+                </div>
+            </form>
         </div>
-
-
-
     </div>
-</div>
+
+@endsection
 
 @push('scripts')
     <script>
@@ -89,6 +67,3 @@
         });
     </script>
 @endpush
-
-
-@extends('layouts.footer')

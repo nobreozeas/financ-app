@@ -8,6 +8,11 @@ body {
     font-family: 'Nunito' !important;
 }
 
+
+#modalCategoria{
+    max-height: 600px !important;
+}
+
 .row_menu {
     width: 100%;
     display: flex;
@@ -29,7 +34,7 @@ body {
 
 .dropdown-menu.dropdown-user.show {
     display: block;
-    margin-left: -30px;
+    margin-left: -20px;
     margin-top: 10px;
 }
 
@@ -231,7 +236,7 @@ thead tr {
 
 .div_graficos{
     width: 100%;
-    margin: 5px;
+
 }
 
 .btn_cadastrar_cartao{
@@ -364,6 +369,36 @@ thead tr {
     }
 }
 
+@media only screen and (max-width: 768.9px) {
+    .menu_grande{
+        display: none;
+    }
+    .botao_add{
+        display: none;
+    }
+    #brand_mobile{
+        display: block;
+    }
+    #brand_desktop{
+        display: none;
+    }
+
+
+}
+
+@media only screen and (min-width: 769px) {
+    .menu_bottom{
+        display: none;
+    }
+
+    #brand_mobile{
+        display: none;
+    }
+    #brand_desktop{
+        display: block;
+    }
+}
+
 .loading {
     left: 0px;
     top: 0px;
@@ -372,3 +407,62 @@ thead tr {
     z-index: 9999;
     background: #fff;
 }
+
+/* ============================= MENU BOTTOM ==================== */
+
+.menu_bottom{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    box-shadow: 0px -2px 1px -1px rgba(0, 0, 0, 0.2), 0px -1px 1px 0px rgba(0, 0, 0, 0.14), 0px -1px 3px 0px rgba(0, 0, 0, 0.12);
+    z-index: 9999;
+}
+
+.menu_bottom ul{
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+
+}
+
+.menu_bottom ul li{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu_bottom ul li a{
+    text-decoration: none;
+    color: #5208D1;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.add_icon{
+    z-index: 9999;
+    padding-bottom: 50px;
+    font-size: 50px;
+    padding-right: 25px;
+}
+
+.add_icon a .icon_plus{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #35128C;
+    color: #fff;
+}
+
+
+/* ============================= MENU BOTTOM ==================== */

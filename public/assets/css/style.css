@@ -376,27 +376,27 @@ thead tr {
     .botao_add{
         display: none;
     }
-    #brand_mobile{
-        display: block;
+    /* #brand_mobile{
+        display: block !important;
     }
     #brand_desktop{
-        display: none;
-    }
+        display: none !important;
+    } */
 
 
 }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
     .menu_bottom{
         display: none;
     }
 
-    #brand_mobile{
-        display: none;
+    /* #brand_mobile{
+        display: none !important;
     }
     #brand_desktop{
-        display: block;
-    }
+        display: block !important;
+    } */
 }
 
 .loading {
@@ -441,9 +441,13 @@ thead tr {
 
 .menu_bottom ul li a{
     text-decoration: none;
-    color: #5208D1;
+    color: #666666;
     font-size: 25px;
     font-weight: 600;
+}
+
+.menu_bottom ul li a.active{
+    color: #35128C;
 }
 
 .add_icon{

@@ -8,7 +8,7 @@
                             <img src="{{ asset('assets/images/logo.png') }}" alt="" width="150">
                     </a>
 
-                    <a href="javascript:void(0)" class="navbar-brand" id="brand_mobile">
+                    {{-- <a href="javascript:void(0)" class="navbar-brand" id="brand_mobile">
                         @if (Route::is('dashboard.index'))
                             <img src="{{ asset('assets/images/logo.png') }}" alt="" width="150">
                         @else
@@ -19,7 +19,7 @@
                             </div>
 
                         @endif
-                    </a>
+                    </a> --}}
 
 
 
